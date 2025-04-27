@@ -57,21 +57,16 @@ rename_firmware() {
         # Xunlong Official
         "-xunlong_orangepi-r1-plus-lts-squashfs-sysupgrade|Orangepi-R1-Plus-LTS-squashfs-sysupgrade"
         "-xunlong_orangepi-r1-plus-lts-ext4-sysupgrade|Orangepi-R1-Plus-LTS-ext4-sysupgrade"
-        
         "-xunlong_orangepi-r1-plus-squashfs-sysupgrade|Orangepi-R1-Plus-squashfs-sysupgrade"
-        "-xunlong_orangepi-r1-plus-ext4-sysupgrade|Orangepi-R1-Plus-ext4-sysupgrade"
-        
-        "-xunlong_orangepi-pc2-squashfs-sysupgrade|Orangepi-Pc2-squashfs-sysupgrade"
-        "-xunlong_orangepi-pc2-ext4-sysupgrade|Orangepi-Pc2-ext4-sysupgrade"
-        
-        "-xunlong_orangepi-zero-plus-squashfs-sysupgrade|Orangepi-Zero-Plus-squashfs-sysupgrade"
-        "-xunlong_orangepi-zero-plus-ext4-sysupgrade|Orangepi-Zero-Plus-ext4-sysupgrade"
-        
-        "-xunlong_orangepi-zero2-squashfs-sysupgrade|Orangepi-Zero2-squashfs-sysupgrade"
-        "-xunlong_orangepi-zero2-ext4-sysupgrade|Orangepi-Zero2-ext4-sysupgrade"
-        
-        "-xunlong_orangepi-zero3-squashfs-sysupgrade|Orangepi-Zero3-squashfs-sysupgrade"
-        "-xunlong_orangepi-zero3-ext4-sysupgrade|Orangepi-Zero3-ext4-sysupgrade"
+        "-xunlong_orangepi-r1-plus-ext4-sysupgrade|Orangepi-R1-Plus-ext4-sysupgrade" 
+        "-sunxi-cortexa53-xunlong_orangepi-pc2-squashfs-sysupgrade|Orangepi-Pc2-squashfs-sysupgrade"
+        "-sunxi-cortexa53-xunlong_orangepi-pc2-ext4-sysupgrade|Orangepi-Pc2-ext4-sysupgrade"
+        "-sunxi-cortexa53-xunlong_orangepi-zero-plus-squashfs-sysupgrade|Orangepi-Zero-Plus-squashfs-sysupgrade"
+        "-sunxi-cortexa53-xunlong_orangepi-zero-plus-ext4-sysupgrade|Orangepi-Zero-Plus-ext4-sysupgrade"
+        "-sunxi-cortexa53-xunlong_orangepi-zero2-squashfs-sysupgrade|Orangepi-Zero2-squashfs-sysupgrade"
+        "-sunxi-cortexa53-xunlong_orangepi-zero2-ext4-sysupgrade|Orangepi-Zero2-ext4-sysupgrade"   
+        "-sunxi-cortexa53-xunlong_orangepi-zero3-squashfs-sysupgrade|Orangepi-Zero3-squashfs-sysupgrade"
+        "-sunxi-cortexa53-xunlong_orangepi-zero3-ext4-sysupgrade|Orangepi-Zero3-ext4-sysupgrade"
         
         # friendlyarm Official
         "-friendlyarm_nanopi-r2c-ext4-sysupgrade|Friendlyarm_Nanopi-R2C-ext4-sysupgrade"
