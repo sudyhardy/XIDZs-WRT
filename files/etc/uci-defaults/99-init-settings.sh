@@ -80,7 +80,7 @@ if grep -Eq "Raspberry Pi|Orange Pi" /proc/cpuinfo; then
   uci set wireless.@wifi-iface[1].ssid='XIDZs-WRT_5G'
   uci set wireless.@wifi-iface[1].encryption='none'
 else
-  uci set wireless.@wifi-device[0].channel='9'
+  uci set wireless.@wifi-device[0].channel='5'
   uci set wireless.@wifi-iface[0].ssid='XIDZs-WRT'
 fi
 uci commit wireless
@@ -205,9 +205,10 @@ fi
 
 # setup Nikki
 if opkg list-installed | grep luci-app-nikki > /dev/null; then
-  echo "setup complete!"
+  echo "nikki detected!"
   chmod +x /etc/nikki/run/GeoIP.dat
   chmod +x /etc/nikki/run/GeoSite.dat
+  echo "setup complete!"
 else
   echo "no nikki detected."
   rm -f /etc/config/nikki
