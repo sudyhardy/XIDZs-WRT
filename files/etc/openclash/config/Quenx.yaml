@@ -147,8 +147,12 @@ rules:
 - MATCH,SERVER-UMUM
 dns:
   proxy-server-nameserver:
-    - dhcp://"eth1" # eth2 wwan0 wwan1 wwan2
-    - 192.168.42.129 # Sesuaikan Ip Modemmu
+    - 112.215.203.246
+    - 112.215.203.247
+    - 112.215.203.248
+    - 112.215.203.254
+    - 112.215.198.248
+    - 112.215.198.254
   nameserver:
     - 1.1.1.1
     - 1.0.0.1
