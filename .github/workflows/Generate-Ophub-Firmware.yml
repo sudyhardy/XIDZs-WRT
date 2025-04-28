@@ -72,6 +72,7 @@ jobs:
     runs-on: ubuntu-22.04
     name: ${{ github.event.inputs.release_branch }}
     outputs:
+      clean-cache: ${{ steps.clean-cache.outputs.clean-cache }}
       target: ${{ steps.set-matrix.outputs.target }}
       type: ${{ steps.setupenv.outputs.type }}
       base: ${{ steps.setupenv.outputs.base }}
@@ -90,6 +91,7 @@ jobs:
           ref: ${{ github.ref_name }}
 
       - name: Clean System Cache
+        id: clean-cache
         run: |
           # Membersihkan cache paket (apt)
           sudo apt-get clean
