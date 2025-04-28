@@ -201,7 +201,6 @@ jobs:
     needs: prebuild
     runs-on: ubuntu-22.04
     env:
-      CLEAN: ${{ needs.prebuild.outputs.clean }}
       TYPE: ${{ needs.prebuild.outputs.type }}
       BASE: ${{ needs.prebuild.outputs.base }}
       BRANCH: ${{ needs.prebuild.outputs.branch }}
@@ -243,36 +242,6 @@ jobs:
         with:
           path: origin
           fetch-depth: 1
-
-      - name: Clean System Cache
-        id: clean  
-        run: |
-          # Membersihkan cache paket (apt)
-          sudo apt-get clean
-          sudo apt-get autoclean
-          sudo apt-get autoremove -y
-
-          # Hapus file-file sementara
-          sudo rm -rf /tmp/*
-          sudo rm -rf /var/tmp/*
-
-          # Hapus cache user
-          rm -rf ~/.cache/*
-
-          # Hapus cache Python (pip)
-          rm -rf ~/.cache/pip
-          rm -rf ~/.npm # Jika menggunakan npm
-          rm -rf ~/.cache/yarn # Jika menggunakan yarn
-
-          # Hapus cache Node Modules (opsional)
-          find . -name "node_modules" -exec rm -rf {} \;
-
-          # Hapus file build sisa (misalnya build/, dist/)
-          rm -rf build/
-          rm -rf dist/
-
-      - name: Show Disk Usage After Cleanup
-        run: df -h
 
       - name: Setup Build Variables
         id: variables
