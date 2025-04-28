@@ -1,0 +1,50 @@
+name: Clean Cache and Temporary Files
+
+on:
+  workflow_dispatch: # Bisa dijalankan manual
+  schedule: # Jalan otomatis setiap hari pukul 02:00 (sesuaikan jadwal)
+    - cron: "0 2 * * *"
+
+jobs:
+  clean_cache:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Clean System Cache
+        run: |
+          # Membersihkan cache paket (apt)
+          sudo apt-get clean
+          sudo apt-get autoclean
+          sudo apt-get autoremove -y
+
+          # Hapus file-file sementara
+          sudo rm -rf /tmp/*
+          sudo rm -rf /var/tmp/*
+
+          # Hapus cache user (misalnya ~/.cache)
+          rm -rf ~/.cache/*
+
+          # Hapus cache Python (pip)
+          rm -rf ~/.cache/pip
+          rm -rf ~/.npm # Jika menggunakan npm
+          rm -rf ~/.cache/yarn # Jika menggunakan yarn
+
+          # Hapus cache Node Modules (opsional)
+          find . -name "node_modules" -exec rm -rf {} \;
+
+          # Hapus file build sisa (misalnya build/, dist/)
+          rm -rf build/
+          rm -rf dist/
+
+      - name: Cleanup Docker (Jika digunakan)
+        if: runner.os == 'Linux'
+        run: |
+          docker system prune -a -f
+          docker volume prune -f
+
+      - name: Show Disk Usage After Cleanup
+        run: df -h
