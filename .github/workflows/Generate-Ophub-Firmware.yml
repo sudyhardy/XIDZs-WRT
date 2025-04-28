@@ -104,7 +104,7 @@ jobs:
               "Amlogic s905l2 MGV-M301A",
               "Amlogic s905x2 X96Max-v2Gb",
               "Amlogic s905x2 X96Max-v4Gb",
-              "Amlogic s905x3 X96Ar_1Gb",
+              "Amlogic s905x3 X96Air_1Gb",
               "Amlogic s905x3 X96Air_100mb",
               "Amlogic s905x3 HK1-Vontar-X3",
               "Amlogic s905x3 X96Max+_100Mb",
@@ -245,7 +245,6 @@ jobs:
 
       - name: Setup Build Variables
         id: variables
-        if: steps.clean.outputs.status == 'success'
         run: |
           MATRIXTARGET="${{ matrix.target }}"
           echo "MATRIXTARGET=$MATRIXTARGET" >> $GITHUB_ENV
