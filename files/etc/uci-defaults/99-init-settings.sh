@@ -80,18 +80,18 @@ if grep -Eq "Raspberry Pi|Orange Pi" /proc/cpuinfo; then
   uci set wireless.@wifi-iface[1].ssid='XIDZs-WRT_5G'
   uci set wireless.@wifi-iface[1].encryption='none'
 else
-  uci set wireless.@wifi-device[0].channel='5'
+  uci set wireless.@wifi-device[0].channel='7'
   uci set wireless.@wifi-iface[0].ssid='XIDZs-WRT'
 fi
 uci commit wireless
 wifi reload && wifi up
 if iw dev | grep -Eq Interface; then
   if grep -Eq "Raspberry Pi|Orange Pi" /proc/cpuinfo; then
-    if ! grep -Eq "wifi up" /etc/rc.local; then
+    if ! grep -q "wifi up" /etc/rc.local; then
       sed -i '/exit 0/i # remove if you dont use wireless' /etc/rc.local
       sed -i '/exit 0/i sleep 10 && wifi up' /etc/rc.local
     fi
-    if ! grep -Eq "wifi up" /etc/crontabs/root; then
+    if ! grep -q "wifi up" /etc/crontabs/root; then
       echo "# remove if you dont use wireless" >> /etc/crontabs/root
       echo "0 */12 * * * wifi down && sleep 5 && wifi up" >> /etc/crontabs/root
       service cron restart
@@ -105,16 +105,16 @@ fi
 echo "setup device amlogic"
 if opkg list-installed | grep luci-app-amlogic > /dev/null; then
     echo "luci-app-amlogic detected."
-    rm -rf /etc/profile.d/30-sysinfo.sh
+    rm -f /etc/profile.d/30-sysinfo.sh
     sed -i '/exit 0/i #sleep 5 && /usr/bin/k5hgled -r' /etc/rc.local
     sed -i '/exit 0/i #sleep 5 && /usr/bin/k6hgled -r' /etc/rc.local
     echo "status complete"
 else
     echo "luci-app-amlogic no detected."
-    rm -rf /usr/bin/k5hgled
-    rm -rf /usr/bin/k6hgled
-    rm -rf /usr/bin/k5hgledon
-    rm -rf /usr/bin/k6hgledon
+    rm -f /usr/bin/k5hgled
+    rm -f /usr/bin/k6hgled
+    rm -f /usr/bin/k5hgledon
+    rm -f /usr/bin/k6hgledon
 fi
 
 # Disable opkg signature check
@@ -198,8 +198,8 @@ if opkg list-installed | grep luci-app-openclash > /dev/null; then
   echo "setup complete!"
 else
   echo "no openclash detected."
-  rm -rf /etc/config/openclash1
-  rm -rf /etc/openclash
+  rm -f /etc/config/openclash1
+  rm -f /etc/openclash
   rm -rf /usr/share/openclash
 fi
 
