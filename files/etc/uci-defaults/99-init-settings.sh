@@ -154,10 +154,6 @@ chmod +x /root/install2.sh && bash /root/install2.sh
 chmod -R +x /sbin
 chmod -R +x /usr/bin
 
-# symlink Tinyfm
-echo "symlink tinyfm"
-ln -s / /www/tinyfm/rootfs
-
 # move jquery.min.js
 echo "move jquery.min.js"
 mv /usr/share/netdata/web/lib/jquery-3.6.0.min.js /usr/share/netdata/web/lib/jquery-2.2.4.min.js
@@ -173,7 +169,12 @@ chmod +x /www/vnstati/vnstati.sh && bash /www/vnstati/vnstati.sh
 # restart netdata and vnstat
 echo "restart netdata and vnstat"
 /etc/init.d/netdata restart
+sleep 2
 /etc/init.d/vnstat restart
+
+# symlink Tinyfm
+echo "symlink tinyfm"
+ln -s / /www/tinyfm/rootfs
 
 # setup openclash
 if opkg list-installed | grep luci-app-openclash > /dev/null; then
