@@ -41,18 +41,21 @@ uci set network.WAN=interface
 uci set network.WAN.proto='dhcp'
 uci set network.WAN.device='usb0'
 uci set network.WAN2=interface
-uci set network.WAN2.proto='none'
-uci set network.WAN2.device='wwan0'
+uci set network.WAN2.proto='dhcp'
+uci set network.WAN2.device='eth1'
 uci set network.MODEM=interface
-uci set network.MODEM.proto='modemmanager'
-uci set network.MODEM.device='/sys/devices/platform/scb/fd500000.pcie/pci0000:00/0000:00:00.0/0000:01:00.0/usb2/2-1'
-uci set network.MODEM.apn='internet'
-uci set network.MODEM.auth='none'
-uci set network.MODEM.iptype='ipv4'
-uci set network.MODEM.signalrate='10'
+uci set network.MODEM.proto='none'
+uci set network.MODEM.device='wwan0'
+uci set network.MM=interface
+uci set network.MM.proto='modemmanager'
+uci set network.MM.device='/sys/devices/platform/scb/fd500000.pcie/pci0000:00/0000:00:00.0/0000:01:00.0/usb2/2-1'
+uci set network.MM.apn='internet'
+uci set network.MM.auth='none'
+uci set network.MM.iptype='ipv4'
+uci set network.MM.signalrate='10'
 uci -q delete network.wan6
 uci commit network
-uci set firewall.@zone[1].network='WAN MODEM'
+uci set firewall.@zone[1].network='WAN WAN2 MM'
 uci commit firewall
 
 # configure ipv6
