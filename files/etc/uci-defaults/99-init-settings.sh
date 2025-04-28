@@ -70,7 +70,7 @@ uci set wireless.@wifi-device[0].country='ID'
 uci set wireless.@wifi-device[0].htmode='HT40'
 uci set wireless.@wifi-iface[0].mode='ap'
 uci set wireless.@wifi-iface[0].encryption='none'
-if grep -q "Raspberry Pi" /proc/cpuinfo; then
+if grep -Eq "Raspberry Pi|Orange Pi" /proc/cpuinfo; then
   uci set wireless.@wifi-device[1].disabled='0'
   uci set wireless.@wifi-iface[1].disabled='0'
   uci set wireless.@wifi-device[1].country='ID'
@@ -80,18 +80,18 @@ if grep -q "Raspberry Pi" /proc/cpuinfo; then
   uci set wireless.@wifi-iface[1].ssid='XIDZs-WRT_5G'
   uci set wireless.@wifi-iface[1].encryption='none'
 else
-  uci set wireless.@wifi-device[0].channel='7'
+  uci set wireless.@wifi-device[0].channel='9'
   uci set wireless.@wifi-iface[0].ssid='XIDZs-WRT'
 fi
 uci commit wireless
 wifi reload && wifi up
-if iw dev | grep -q Interface; then
-  if grep -q "Raspberry Pi" /proc/cpuinfo; then
-    if ! grep -q "wifi up" /etc/rc.local; then
+if iw dev | grep -Eq Interface; then
+  if grep -Eq "Raspberry Pi|Orange Pi" /proc/cpuinfo; then
+    if ! grep -Eq "wifi up" /etc/rc.local; then
       sed -i '/exit 0/i # remove if you dont use wireless' /etc/rc.local
       sed -i '/exit 0/i sleep 10 && wifi up' /etc/rc.local
     fi
-    if ! grep -q "wifi up" /etc/crontabs/root; then
+    if ! grep -Eq "wifi up" /etc/crontabs/root; then
       echo "# remove if you dont use wireless" >> /etc/crontabs/root
       echo "0 */12 * * * wifi down && sleep 5 && wifi up" >> /etc/crontabs/root
       service cron restart
