@@ -72,7 +72,6 @@ jobs:
     runs-on: ubuntu-22.04
     name: ${{ github.event.inputs.release_branch }}
     outputs:
-      clean-cache: ${{ steps.clean-cache.outputs.clean-cache }}
       target: ${{ steps.set-matrix.outputs.target }}
       type: ${{ steps.setupenv.outputs.type }}
       base: ${{ steps.setupenv.outputs.base }}
@@ -90,36 +89,6 @@ jobs:
         with:
           ref: ${{ github.ref_name }}
 
-      - name: Clean System Cache
-        id: clean-cache
-        run: |
-          # Membersihkan cache paket (apt)
-          sudo apt-get clean
-          sudo apt-get autoclean
-          sudo apt-get autoremove -y
-
-          # Hapus file-file sementara
-          sudo rm -rf /tmp/*
-          sudo rm -rf /var/tmp/*
-
-          # Hapus cache user
-          rm -rf ~/.cache/*
-
-          # Hapus cache Python (pip)
-          rm -rf ~/.cache/pip
-          rm -rf ~/.npm # Jika menggunakan npm
-          rm -rf ~/.cache/yarn # Jika menggunakan yarn
-
-          # Hapus cache Node Modules (opsional)
-          find . -name "node_modules" -exec rm -rf {} \;
-
-          # Hapus file build sisa (misalnya build/, dist/)
-          rm -rf build/
-          rm -rf dist/
-
-      - name: Show Disk Usage After Cleanup
-        run: df -h
-
       - name: Set Matrix Run
         id: set-matrix
         run: |
@@ -135,7 +104,7 @@ jobs:
               "Amlogic s905l2 MGV-M301A",
               "Amlogic s905x2 X96Max-v2Gb",
               "Amlogic s905x2 X96Max-v4Gb",
-              "Amlogic s905x3 X96Air_1Gb",
+              "Amlogic s905x3 X96Ar_1Gb",
               "Amlogic s905x3 X96Air_100mb",
               "Amlogic s905x3 HK1-Vontar-X3",
               "Amlogic s905x3 X96Max+_100Mb",
@@ -232,6 +201,7 @@ jobs:
     needs: prebuild
     runs-on: ubuntu-22.04
     env:
+      CLEAN: ${{ needs.prebuild.outputs.clean }}
       TYPE: ${{ needs.prebuild.outputs.type }}
       BASE: ${{ needs.prebuild.outputs.base }}
       BRANCH: ${{ needs.prebuild.outputs.branch }}
@@ -274,8 +244,39 @@ jobs:
           path: origin
           fetch-depth: 1
 
+      - name: Clean System Cache
+        id: clean  
+        run: |
+          # Membersihkan cache paket (apt)
+          sudo apt-get clean
+          sudo apt-get autoclean
+          sudo apt-get autoremove -y
+
+          # Hapus file-file sementara
+          sudo rm -rf /tmp/*
+          sudo rm -rf /var/tmp/*
+
+          # Hapus cache user
+          rm -rf ~/.cache/*
+
+          # Hapus cache Python (pip)
+          rm -rf ~/.cache/pip
+          rm -rf ~/.npm # Jika menggunakan npm
+          rm -rf ~/.cache/yarn # Jika menggunakan yarn
+
+          # Hapus cache Node Modules (opsional)
+          find . -name "node_modules" -exec rm -rf {} \;
+
+          # Hapus file build sisa (misalnya build/, dist/)
+          rm -rf build/
+          rm -rf dist/
+
+      - name: Show Disk Usage After Cleanup
+        run: df -h
+
       - name: Setup Build Variables
         id: variables
+        if: steps.clean.outputs.status == 'success'
         run: |
           MATRIXTARGET="${{ matrix.target }}"
           echo "MATRIXTARGET=$MATRIXTARGET" >> $GITHUB_ENV
