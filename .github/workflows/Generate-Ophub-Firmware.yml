@@ -39,6 +39,7 @@ on:
           - Amlogic s905x3 HK1-Vontar-X3
           - Amlogic s905x3 X96Max+_100Mb
           - Amlogic s905x3 X96Max+_1Gb
+          - Amlogic s905x4
           - RK3318-BOX
           - Firefly-RK3328
       tunnel:
@@ -109,6 +110,7 @@ jobs:
               "Amlogic s905x3 HK1-Vontar-X3",
               "Amlogic s905x3 X96Max+_100Mb",
               "Amlogic s905x3 X96Max+_1Gb",
+              "Amlogic s905x4",
               "RK3318-BOX",
               "Firefly-RK3328"
             ]
@@ -362,6 +364,12 @@ jobs:
               echo "TARGET_BUILD=$TARGET_BUILD" >> $GITHUB_ENV
               echo "KERNEL=$KERNEL" >> $GITHUB_ENV
               ;;
+            "Amlogic s905x4")
+              TARGET_BUILD="s905x4"
+              KERNEL="6.6.y_6.12.y"
+              echo "TARGET_BUILD=$TARGET_BUILD" >> $GITHUB_ENV
+              echo "KERNEL=$KERNEL" >> $GITHUB_ENV
+              ;;
             "Orangepi 3")
               TARGET_BUILD="orangepi-3"
               KERNEL="6.6.y"
@@ -519,7 +527,7 @@ jobs:
           
       - name: Mod SDCard
         id: modsdcard
-        if: steps.re.outputs.status == 'success'
+        if: steps.repack.outputs.status == 'success'
         run: |
           cd ${WORKING_DIR}
           chmod +x scripts/MODSDCARD.sh
@@ -528,7 +536,7 @@ jobs:
           
       - name: Before Upload
         id: beforeupload
-        if: steps.repack.outputs.status == 'success'
+        if: steps.modsdcard.outputs.status == 'success'
         run: |
           cd ${{ env.WORKING_DIR }}
           chmod +x scripts/RENAMEFW.sh
