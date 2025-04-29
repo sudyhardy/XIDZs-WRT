@@ -303,25 +303,25 @@ jobs:
                 echo "TARGET_BUILD=$TARGET_BUILD" >> $GITHUB_ENV
                 ;;
             "Allwinner H6 Orange Pi 3")
-                KERNEL="6.6.6-AW64-DBAI"
+                KERNEL="6.1.31-AW64-DBAI"
                 echo "KERNEL=$KERNEL" >> $GITHUB_ENV
                 TARGET_BUILD="h6-orangepi-3"
                 echo "TARGET_BUILD=$TARGET_BUILD" >> $GITHUB_ENV
                 ;;
             "Allwinner H6 Orange Pi 3 LTS")
-                KERNEL="6.6.6-AW64-DBAI"
+                KERNEL="6.1.31-AW64-DBAI"
                 echo "KERNEL=$KERNEL" >> $GITHUB_ENV
                 TARGET_BUILD="h6-orangepi-3lts"
                 echo "TARGET_BUILD=$TARGET_BUILD" >> $GITHUB_ENV
                 ;;
             "Allwinner H616 Orange Pi Zero2")
-                KERNEL="6.6.6-AW64-DBAI"
+                KERNEL="6.1.31-AW64-DBAI"
                 echo "KERNEL=$KERNEL" >> $GITHUB_ENV
                 TARGET_BUILD="h616-orangepi-zero2"
                 echo "TARGET_BUILD=$TARGET_BUILD" >> $GITHUB_ENV
                 ;;
             "Allwinner H618 Orange Pi Zero3")
-                KERNEL="6.6.6-AW64-DBAI"
+                KERNEL="6.1.31-AW64-DBAI"
                 echo "KERNEL=$KERNEL" >> $GITHUB_ENV
                 TARGET_BUILD="h618-orangepi-zero3"
                 echo "TARGET_BUILD=$TARGET_BUILD" >> $GITHUB_ENV
