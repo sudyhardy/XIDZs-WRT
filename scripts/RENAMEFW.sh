@@ -115,6 +115,7 @@ rename_firmware() {
         "_s905x3-hk1_|Amlogic_s905x3-HK1BOX"
         "_s905x3_|Amlogic_s905x3_X96MAX+_100Mb"
         "_s905x3-x96max_|Amlogic_s905x3_X96MAX+_1Gb"
+        "_s905x4_|Amlogic_s905x4_AX810"
         "_s905w_|Amlogic_s905w_TX3_Mini"
         "_s905w-x96-mini_|Amlogic_s905w-X96-Mini"
         
