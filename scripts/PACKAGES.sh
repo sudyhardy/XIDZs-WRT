@@ -16,7 +16,6 @@ REPOS+=(
     ["KIDDIN9"]="https://dl.openwrt.ai/releases/24.10/packages/${ARCH_3}/kiddin9"
     ["GSPOTX2F"]="https://github.com/gSpotx2f/packages-openwrt/raw/refs/heads/master/current"
     ["FANTASTIC"]="https://fantastic-packages.github.io/packages/releases/${VEROP}/packages/x86_64"
-    ["DLLKIDS"]="https://op.dllkids.xyz/packages/${ARCH_3}"
 )
 
 # Define package categories with improved structure
@@ -24,7 +23,6 @@ declare -a packages_custom
 packages_custom+=(
     "modeminfo_|${REPOS[KIDDIN9]}"
     "luci-app-modeminfo_|${REPOS[KIDDIN9]}"
-    "modeminfo-serial-fm350_|${REPOS[DLLKIDS]}"
     "modeminfo-serial-tw_|${REPOS[KIDDIN9]}"
     "modeminfo-serial-dell_|${REPOS[KIDDIN9]}"
     "modeminfo-serial-sierra_|${REPOS[KIDDIN9]}"
@@ -32,11 +30,8 @@ packages_custom+=(
     "modeminfo-serial-fibocom_|${REPOS[KIDDIN9]}"
     "modeminfo-serial-sierra_|${REPOS[KIDDIN9]}"
     
-    "fm350-modem_|${REPOS[DLLKIDS]}"
-    "luci-proto-fm350_|${REPOS[DLLKIDS]}"
     "atinout_|${REPOS[KIDDIN9]}"
     "luci-app-diskman_|${REPOS[KIDDIN9]}"
-    "luci-app-poweroff_|${REPOS[DLLKIDS]}"
     "luci-app-poweroffdevice_|${REPOS[KIDDIN9]}" 
     "xmm-modem_|${REPOS[KIDDIN9]}"
     
